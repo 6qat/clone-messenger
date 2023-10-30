@@ -7,7 +7,6 @@ import Input from '@/app/components/inputs/Input';
 type Variant = 'LOGIN' | 'REGISTER';
 
 export default function AuthForm() {
-
   const [variant, setVariant] = useState<Variant>('LOGIN');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -22,9 +21,7 @@ export default function AuthForm() {
   const {
     register,
     handleSubmit,
-    formState: {
-      errors,
-    },
+    formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
       name: '',
@@ -53,10 +50,7 @@ export default function AuthForm() {
     <>
       <div className={`mt-8 sm:mx-auto sm:w-full sm:max-w-md`}>
         <div className={`bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10`}>
-          <form
-            className={`space-y-6`}
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <form className={`space-y-6`} onSubmit={handleSubmit(onSubmit)}>
             <Input
               id='email'
               label='Email'
@@ -69,4 +63,3 @@ export default function AuthForm() {
     </>
   );
 }
-
