@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Input from '@/app/components/inputs/Input';
+import Button from '@/app/components/Button';
 
 type Variant = 'LOGIN' | 'REGISTER';
 
@@ -54,13 +55,45 @@ export default function AuthForm() {
             className={`space-y-6`}
             onSubmit={handleSubmit(onSubmit)}
           >
+            {variant === 'REGISTER' && (
+              <Input
+                id='name'
+                label='Name'
+                register={register}
+                errors={errors}
+              />
+            )}
             <Input
               id='email'
-              label='Email'
+              label='Email address'
+              type='email'
               register={register}
               errors={errors}
             />
+            <Input
+              id='password'
+              label='Password'
+              type='password'
+              register={register}
+              errors={errors}
+            />
+            <div>
+              <Button
+                disabled={isLoading}
+                fullWidth
+                type='submit'
+              >
+                {variant === 'REGISTER' ? 'Register' : 'Sign In'}
+              </Button>
+            </div>
           </form>
+          <div className='mt-6'>
+            <div className={`relative`}>
+              <div className={`absolute inset-0 flex items-center`}>
+                <div className={`w-full border-t border-gray-300`}></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
