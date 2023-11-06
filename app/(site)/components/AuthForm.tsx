@@ -52,6 +52,9 @@ export default function AuthForm() {
     if (variant === 'REGISTER') {
       axios
         .post('/api/register', data)
+        .then(() => {
+          signIn('credentials', data);
+        })
         .catch(() => {
           toast.error("Something went wrong. We couldn't create your account.");
         })
@@ -70,6 +73,7 @@ export default function AuthForm() {
           }
           if (callback?.ok && !callback?.error) {
             toast.success('Welcome back!');
+            router.push('/users');
           }
         })
         .finally(() => {
