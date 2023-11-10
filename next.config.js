@@ -4,6 +4,7 @@ const nextConfig = {
     swcPlugins: [['next-superjson-plugin', {}]],
   },
   images: {
+    // domains: ['flowbite.com', 'lh3.googleusercontent.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,6 +15,18 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
         port: '',
         pathname: '/**',
       },
