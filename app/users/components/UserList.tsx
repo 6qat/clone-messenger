@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { User } from '@prisma/client';
+import UserBox from '@/app/users/components/UserBox';
 
 const UserList = ({ items }: { items: User[] }) => {
   return (
@@ -14,7 +15,11 @@ const UserList = ({ items }: { items: User[] }) => {
           </div>
         </div>
         {items.map((item) => (
-          <div key={item.id}>{item.name}</div>
+          <UserBox
+            key={item.id}
+            data={item}
+          />
+          // <div key={item.id}>{item.name}</div>
         ))}
       </div>
     </aside>
