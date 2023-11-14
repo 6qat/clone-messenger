@@ -8,6 +8,9 @@ import bcrypt from 'bcrypt';
 
 import prisma from '@/app/libs/prismadb';
 
+/**
+ * NextAuth configuration
+ */
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -62,4 +65,7 @@ export const authOptions: AuthOptions = {
 
 const handler = NextAuth(authOptions);
 
+/**
+ * Both GET and POST requests are handled by NextAuth
+ */
 export { handler as GET, handler as POST };

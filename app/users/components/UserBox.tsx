@@ -7,7 +7,9 @@ import Avatar from '@/app/components/Avatar';
 
 const UserBox = ({ data }: { data: User }) => {
   const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
+
   const handleClick = useCallback(() => {
     setIsLoading(true);
     axios
@@ -18,6 +20,7 @@ const UserBox = ({ data }: { data: User }) => {
       .catch((err) => {})
       .finally(() => setIsLoading(false));
   }, [data, router]);
+
   return (
     <div
       onClick={handleClick}

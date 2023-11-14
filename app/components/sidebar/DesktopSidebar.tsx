@@ -29,7 +29,6 @@ const DesktopSidebar = ({ currentUser }: { currentUser: User }) => {
               onClick={item.onClick}
             />
           ))}
-          {/*{JSON.stringify(currentUser)}*/}
         </ul>
       </nav>
       <nav className={`mt-4 flex flex-col items-center justify-between`}>
