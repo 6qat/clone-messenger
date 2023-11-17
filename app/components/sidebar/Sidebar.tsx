@@ -2,7 +2,6 @@ import React from 'react';
 import DesktopSidebar from '@/app/components/sidebar/DesktopSidebar';
 import MobileFooter from '@/app/components/sidebar/MobileFooter';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
-import { User } from '@prisma/client';
 
 const Sidebar = async ({ children }: { children: React.ReactNode }) => {
   const currentUser = await getCurrentUser();

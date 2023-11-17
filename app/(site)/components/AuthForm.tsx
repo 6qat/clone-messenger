@@ -53,7 +53,7 @@ export default function AuthForm() {
       axios
         .post('/api/register', data)
         .then(() => {
-          signIn('credentials', data);
+          signIn('credentials', data).catch(() => {});
         })
         .catch(() => {
           toast.error("Something went wrong. We couldn't create your account.");

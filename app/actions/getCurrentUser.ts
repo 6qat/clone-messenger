@@ -1,6 +1,5 @@
 import prisma from '@/app/libs/prismadb';
 import getSession from './getSession';
-import { User } from '@prisma/client';
 
 export const getCurrentUser = async () => {
   try {
@@ -11,7 +10,7 @@ export const getCurrentUser = async () => {
       where: {
         email: session.user.email as string,
       },
-    }) ;
+    });
     if (!currentUser) return null;
     return currentUser;
   } catch (e: any) {

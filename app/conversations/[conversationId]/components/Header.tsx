@@ -4,6 +4,7 @@ import { Conversation, User } from '@prisma/client';
 import useOtherUser from '@/app/hooks/useOtherUser';
 import Link from 'next/link';
 import { HiChevronLeft } from 'react-icons/hi2';
+import Avatar from '@/app/components/Avatar';
 
 interface HeaderProps {
   conversation: Conversation & {
@@ -13,12 +14,14 @@ interface HeaderProps {
 
 const Header = ({ conversation }: HeaderProps) => {
   const otherUser = useOtherUser(conversation);
+
   const statusText = useMemo(() => {
     if (conversation.isGroup) {
       return `${conversation.users.length} members`;
     }
     return 'Active';
   }, [conversation]);
+
   return (
     <div
       className={`flex w-full items-center justify-between border-b-[1px] bg-white px-4 py-3 shadow-sm sm:px-4 lg:px-6`}
@@ -30,6 +33,13 @@ const Header = ({ conversation }: HeaderProps) => {
         >
           <HiChevronLeft size={32} />
         </Link>
+        <Avatar user={otherUser} />
+        <div className={`flex flex-col`}>
+          <div>{conversation.name || otherUser.name}</div>
+          <div className={`text-sm font-light text-neutral-500`}>
+            {statusText}
+          </div>
+        </div>
       </div>
     </div>
   );
