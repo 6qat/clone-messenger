@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { Conversation, User } from '@prisma/client';
 import useOtherUser from '@/app/hooks/useOtherUser';
 import Link from 'next/link';
-import { HiChevronLeft } from 'react-icons/hi2';
+import { HiChevronLeft, HiEllipsisHorizontal } from 'react-icons/hi2';
 import Avatar from '@/app/components/Avatar';
 
 interface HeaderProps {
@@ -41,6 +41,11 @@ const Header = ({ conversation }: HeaderProps) => {
           </div>
         </div>
       </div>
+      <HiEllipsisHorizontal
+        size={32}
+        onClick={() => {}}
+        className={`cursor-pointer text-sky-500 transition hover:text-sky-600`}
+      />
     </div>
   );
 };
