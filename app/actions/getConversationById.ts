@@ -1,3 +1,5 @@
+'use server';
+import 'server-only';
 import prisma from '@/app/libs/prismadb';
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
 

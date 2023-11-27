@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
+// There are 2 modes to use this component:
 type Variant = 'LOGIN' | 'REGISTER';
 
 export default function AuthForm() {
