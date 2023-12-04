@@ -1,11 +1,12 @@
 'use client';
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import { Conversation, User } from '@prisma/client';
 import useOtherUser from '@/app/hooks/useOtherUser';
 import { format } from 'date-fns';
 import { Dialog, Transition } from '@headlessui/react';
 import { IoClose, IoTrash } from 'react-icons/io5';
 import Avatar from '@/app/components/Avatar';
+import ConfirmModel from './ConfirmModel';
 
 interface ProfileDrawerProps {
   data: Conversation & {
@@ -17,6 +18,9 @@ interface ProfileDrawerProps {
 
 const ProfileDrawer = ({ isOpen, onClose, data }: ProfileDrawerProps) => {
   const otherUser = useOtherUser(data);
+
+  // The Delete Conversation modal
+  const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
 
   const joinedDate = useMemo(() => {
     return format(new Date(otherUser.createdAt), 'PP');
@@ -34,28 +38,36 @@ const ProfileDrawer = ({ isOpen, onClose, data }: ProfileDrawerProps) => {
   }, [data]);
 
   return (
-    <Transition.Root
-      show={isOpen}
-      as={Fragment}
-    >
-      <Dialog
-        as='div'
-        className={`relative z-50`}
-        onClose={onClose}
+    <>
+      <ConfirmModel
+        isOpen={isModalConfirmOpen}
+        onClose={() => {
+          setIsModalConfirmOpen(false);
+        }}
+      />
+
+      <Transition.Root
+        show={isOpen}
+        as={Fragment}
       >
-        <Transition.Child
-          as={Fragment}
-          enter='ease-out duration-500'
-          enterFrom='opacity-0'
-          enterTo={`opacity-100`}
-          leave='ease-in duration-500'
-          leaveFrom={`opacity-100`}
-          leaveTo='opacity-0'
+        <Dialog
+          as='div'
+          className={`relative z-50`}
+          onClose={onClose}
         >
-          <div className={`fixed inset-0 bg-black bg-opacity-40`} />
-        </Transition.Child>
-        <div className={`fixed inset-0 overflow-hidden`}>
-          <div className={`absolute inset-0 overflow-hidden`}>
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-500'
+            enterFrom='opacity-0'
+            enterTo={`opacity-100`}
+            leave='ease-in duration-500'
+            leaveFrom={`opacity-100`}
+            leaveTo='opacity-0'
+          >
+            <div className={`fixed inset-0 bg-black bg-opacity-40`} />
+          </Transition.Child>
+          <div className={`fixed inset-0 overflow-hidden`}>
+            {/*<div className={`absolute inset-0 overflow-hidden`}>*/}
             <div
               className={`pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10`}
             >
@@ -98,7 +110,7 @@ const ProfileDrawer = ({ isOpen, onClose, data }: ProfileDrawerProps) => {
                         </div>
                         <div className={`my-8 flex gap-10`}>
                           <div
-                            onClick={() => {}}
+                            onClick={() => setIsModalConfirmOpen(true)}
                             className={`flex cursor-pointer flex-col items-center gap-3 hover:opacity-75`}
                           >
                             <div
@@ -158,10 +170,11 @@ const ProfileDrawer = ({ isOpen, onClose, data }: ProfileDrawerProps) => {
                 </Dialog.Panel>
               </Transition.Child>
             </div>
+            {/*</div>*/}
           </div>
-        </div>
-      </Dialog>
-    </Transition.Root>
+        </Dialog>
+      </Transition.Root>
+    </>
   );
 };
 
